@@ -124,19 +124,18 @@ def get_data(videoid):
         }
         for i in t["recommendedVideos"]
     ]
-     
-
+    
     # 必要な情報をテンプレートに渡す
     return (
-    related_videos,  # 関連動画リスト
-    list(reversed([i["url"] for i in t["formatStreams"]]))[:2],  # 逆順で2つのストリームURL
-    t["descriptionHtml"].replace("\n", "<br>"),  # 説明文に改行を追加
-    t["title"],  # 動画タイトル
-    t["authorId"],  # 作者ID
-    t["author"],  # 作者名
-    t["authorThumbnails"][-1]["url"],  # 最後のサムネイルURL
-    t["viewCount"]  # 動画の再生回数を追加
-)
+        related_videos,  # 関連動画リスト
+        list(reversed([i["url"] for i in t["formatStreams"]]))[:2],  # 逆順で2つのストリームURL
+        t["descriptionHtml"].replace("\n", "<br>"),  # 説明文に改行を追加
+        t["title"],  # 動画タイトル
+        t["authorId"],  # 作者ID
+        t["author"],  # 作者名
+        t["authorThumbnails"][-1]["url"],  # 最後のサムネイルURL
+        t["viewCount"]  # 動画の再生回数を追加
+    )
 
     return render_template(
         'video.html',
@@ -150,6 +149,7 @@ def get_data(videoid):
         author_thumbnail_url=t["authorThumbnails"][-1]["url"],  # 最後のサムネイルURL
         view_count=t["viewCount"]  # 動画の再生回数
     )
+
 
 # 動画取得用APIリクエスト関数を作成
 def apirequest_video(url):
