@@ -127,6 +127,17 @@ def get_data(videoid):
      
 
     # 必要な情報をテンプレートに渡す
+    return (
+    related_videos,  # 関連動画リスト
+    list(reversed([i["url"] for i in t["formatStreams"]]))[:2],  # 逆順で2つのストリームURL
+    t["descriptionHtml"].replace("\n", "<br>"),  # 説明文に改行を追加
+    t["title"],  # 動画タイトル
+    t["authorId"],  # 作者ID
+    t["author"],  # 作者名
+    t["authorThumbnails"][-1]["url"],  # 最後のサムネイルURL
+    t["viewCount"]  # 動画の再生回数を追加
+)
+
     return render_template(
         'video.html',
         video_data=json.dumps(t),  # 動画データをJSON形式で渡す
